@@ -28,6 +28,7 @@ module "lambda-triggerServer" {
       INSTANCE_PROFILE = aws_iam_instance_profile.server-ec2.name
       INSTANCE_TYPE = var.instance-type
       SECURITY_GROUP = aws_security_group.server-sg.name
+      SERVER_MEMORY = var.server-memory
       SERVERS_TABLE = aws_dynamodb_table.servers.name
       SERVERS_BUCKET = aws_s3_bucket.servers-bucket.bucket
       SSH_KEY_PAIR_NAME = var.ssh-key-pair-name

@@ -7,7 +7,8 @@ aws s3 cp "s3://${SERVERS_BUCKET}/${SERVER_ID}.tar.gz" .
 tar -xzf "${SERVER_ID}.tar.gz"
 cd minecraft
 screen -dmS minecraft-server
-screen -S minecraft-server -p 0 -X stuff 'java -Xmx2048M -Xms2048M -jar server.jar nogui\n'
+# SERVER_MEMORY will be replaced by lambda
+screen -S minecraft-server -p 0 -X stuff "java -Xmx${SERVER_MEMORY} -Xms${SERVER_MEMORY} -jar server.jar nogui\n"
 cd ..
 IPV4_ADDRESS=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
 

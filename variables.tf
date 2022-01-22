@@ -8,6 +8,11 @@ variable instance-type {
   default = "t4g.medium"
 }
 
+variable server-memory {
+  type = string
+  default = "2048M"
+}
+
 variable ssh-key-pair-name {
   type = string
 }
