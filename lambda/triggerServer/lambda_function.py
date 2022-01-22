@@ -108,9 +108,6 @@ def start_server(server_id):
     user_data = user_data.replace('${SERVERS_BUCKET}', SERVERS_BUCKET)
     user_data = user_data.replace('${SERVERS_TABLE}', SERVERS_TABLE)
     kwargs = {
-        'CreditSpecification': {
-            'CpuCredits': 'standard',
-        },
         'IamInstanceProfile': {
             'Name': INSTANCE_PROFILE,
         },
@@ -146,6 +143,10 @@ def start_server(server_id):
         ],
         'UserData': user_data,
     }
+    if INSTANCE_TYPE.startswith('t'):
+        kwargs['CreditSpecification'] = {
+            'CpuCredits': 'standard',
+        }
     print('Calling ec2.create_instances with kwargs: {}'.format(json.dumps(kwargs)))
     response = ec2.create_instances(**kwargs)
     print(f"Received response: {json.dumps(response, default=str)}")
