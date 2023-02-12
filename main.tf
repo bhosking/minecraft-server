@@ -32,6 +32,7 @@ module "lambda-triggerServer" {
       SERVERS_TABLE = aws_dynamodb_table.servers.name
       SERVERS_BUCKET = aws_s3_bucket.servers-bucket.bucket
       SSH_KEY_PAIR_NAME = var.ssh-key-pair-name
+      UBUNTU_JAVA_PACKAGE = var.ubuntu-java-package
     }
   }
 }

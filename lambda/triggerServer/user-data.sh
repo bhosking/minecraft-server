@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x -e
 apt update
-apt install -y awscli openjdk-17-jre-headless
+apt install -y awscli ${UBUNTU_JAVA_PACKAGE}
 # SERVERS_BUCKET and SERVER_ID will be replaced by lambda
 aws s3 cp "s3://${SERVERS_BUCKET}/${SERVER_ID}.tar.gz" .
 tar -xzf "${SERVER_ID}.tar.gz"

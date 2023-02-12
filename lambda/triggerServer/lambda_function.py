@@ -16,6 +16,7 @@ SERVER_MEMORY = os.environ['SERVER_MEMORY']
 SERVERS_BUCKET = os.environ['SERVERS_BUCKET']
 SERVERS_TABLE = os.environ['SERVERS_TABLE']
 SSH_KEY_PAIR_NAME = os.environ['SSH_KEY_PAIR_NAME']
+UBUNTU_JAVA_PACKAGE = os.environ['UBUNTU_JAVA_PACKAGE']
 
 
 HEADERS = {
@@ -101,12 +102,14 @@ def start_server(server_id):
         user_data = user_data_file.read()
     with open('server-stopper.sh') as server_stopper_file:
         server_stopper = server_stopper_file.read()
+
     user_data = user_data.replace('${SERVER_STOPPER}', server_stopper)
     user_data = user_data.replace('${AWS_REGION}', os.environ['AWS_REGION'])
     user_data = user_data.replace('${SERVER_ID}', server_id)
     user_data = user_data.replace('${SERVER_MEMORY}', SERVER_MEMORY)
     user_data = user_data.replace('${SERVERS_BUCKET}', SERVERS_BUCKET)
     user_data = user_data.replace('${SERVERS_TABLE}', SERVERS_TABLE)
+    user_data = user_data.replace('${UBUNTU_JAVA_PACKAGE}', UBUNTU_JAVA_PACKAGE)
     kwargs = {
         'IamInstanceProfile': {
             'Name': INSTANCE_PROFILE,

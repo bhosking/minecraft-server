@@ -16,3 +16,8 @@ variable server-memory {
 variable ssh-key-pair-name {
   type = string
 }
+
+variable ubuntu-java-package {
+  type    = string
+  default = "openjdk-17-jre-headless"
+}
