@@ -6,7 +6,7 @@ do
   sleep 299
   screen -S minecraft-server -p 0 -X stuff 'list\n'
   sleep 1
-  num_empty=$(tail -n 2 /minecraft/logs/latest.log | grep -e '^\[.\{8\}\] \[Server thread/INFO]: There are 0 of a max of' -c) || true
+  num_empty=$(tail -n 4 /minecraft/logs/latest.log | grep -e '^\[.\{8\}\] \[Server thread/INFO]\( \[[^]]*\]\)*: There are ' | tail -n 2 | grep -e '^\[.\{8\}\] \[Server thread/INFO]\( \[[^]]*\]\)*: There are 0\>' -c) || true
   if [[ "$num_empty" -eq 2 ]]
   then
     break
